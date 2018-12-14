@@ -1,10 +1,8 @@
 import pickle
 
-from keras_preprocessing.text import Tokenizer
 from Classes.Data import Data
 from Classes.Dataset import Dataset
 from Preprocess.preProcessing import to_process
-from Preprocess.Emotional_Words import getEmotionalWords
 
 
 def genAmazonData():
@@ -37,13 +35,15 @@ def genAmazonData():
 
     return dataset
 
-def main():
-    with open('amazon_dataset', 'rb') as fp:
-        amazondataset = pickle.load(fp)
-
-    x_train, y_train, x_test, y_test = amazondataset.get_train_test(0.2, 1000)
-
-    getEmotionalWords(x_train, y_train)
+def getData():
+    amazondataset = Dataset()
+    try:
+        with open('amazon_dataset', 'rb') as fp:
+            amazondataset = pickle.load(fp)
+    except:
+        amazondataset = genAmazonData()
+    
+    return amazondataset
 
 if __name__ == '__main__':
     main()
