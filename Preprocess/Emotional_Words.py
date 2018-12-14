@@ -29,23 +29,16 @@ def identifyEmotional(word_occurence, percentage):
         neg = word_occurence[i][0]
         pos = word_occurence[i][1]
 
-<<<<<<< HEAD
         total = neg + pos
         neg = neg / total
         pos = pos / total
-=======
-        #total = neg + pos
-        neg = neg / size
-        pos = pos / size
-        print(neg, pos)
->>>>>>> master
 
         if neg >= percentage:
-            emotional_words.append([0, round(neg,2), round(pos,2)])
+            emotional_words.append([0, round(neg, 2), round(pos, 2)])
         elif pos >= percentage:
-            emotional_words.append([1, round(neg,2), round(pos,2)])
+            emotional_words.append([1, round(neg, 2), round(pos, 2)])
         else:
-            emotional_words.append([-1, round(neg,2), round(pos,2)])
+            emotional_words.append([-1, round(neg, 2), round(pos, 2)])
 
     return emotional_words
 
@@ -53,11 +46,8 @@ def identifyEmotional(word_occurence, percentage):
 # this function produces a list of lists containing a 2-dimensional vector
 # for each word in dictionary. the vector V represents V[0] the percentile
 # of appearance of that word in negative documents, and V[1], in positive.
-<<<<<<< HEAD
+
 def getEmotionalWords(data, label, dict_size=-1, word_precision=0.7):
-=======
-def getEmotionalWords(data, label, dict_size=-1, word_precision=0.2):
->>>>>>> master
     size = len(data)
 
     if dict_size < 0:
@@ -75,6 +65,9 @@ def getEmotionalWords(data, label, dict_size=-1, word_precision=0.2):
         word_occurence.append(wordVec)
     emotional_words = identifyEmotional(word_occurence, word_precision)
 
+
     for i in range(len(emotional_words)):
-        if emotional_words[i][0] != -1:
-            print(dictionary[i][0], emotional_words[i])
+        if emotional_words[i][0] == -1:
+            del emotional_words[i]
+
+    return emotional_words
