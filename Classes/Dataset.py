@@ -9,9 +9,9 @@ class Dataset:
         self.docs.append(data.doc)
         self.labels.append(data.label)
 
-    def get_train_test(self, percentile, num_docs):
+    def get_train_test(self, percent, num_docs):
         num = self.docs.__len__()
-        num_test = int(percentile*num_docs)
+        num_test = int(percent*num_docs)
         num_train = int(num_docs - num_test)
 
         index_train = []
