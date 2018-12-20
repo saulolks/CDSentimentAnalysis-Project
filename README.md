@@ -1,6 +1,6 @@
-# Cross-Domain Sentimen Analysis Algorithm: A Guide
+# Cross-Domain Sentiment Analysis Algorithm: A Guide
 
-This repository contains a structure to apply the idea of sentiment analysis for different kinds of subjects or domains. Our code has been developed in Python 3 with some help from the following libraries, such as:
+This repository contains a structure to apply the idea of sentiment analysis for different kinds of subjects or domains. Our code has been developed in Python 3 with some help from the following libraries.
  
  * NLTK
  * Keras
