@@ -4,7 +4,6 @@ import xlrd
 import xlwt
 from xlutils.copy import copy
 
-
 class Dataset:
     def __init__(self):
         self.docs = []
