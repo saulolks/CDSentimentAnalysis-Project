@@ -7,7 +7,7 @@ lemmatizer = WordNetLemmatizer()
 
 def to_process(text):
     # Reading stop-words
-    arq = open('sw.txt', 'r')
+    arq = open('Preprocess/sw.txt', 'r')
     stopWords = arq.read()
 
     # Tokenizing and lemmatizing the documents
