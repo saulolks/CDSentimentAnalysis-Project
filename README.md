@@ -27,6 +27,7 @@ class Dataset:
         self.labels = []
 ```
 
+#### Inserting a data in our dataset
 The documents are in a array and so is labels. Just that. Simple, isn't it? For that class we have some methods as well, like *add()*, which insert a data in our dataset, of course. This method just receive a *Data* class as parameter and put it on out dataset. Have I not told you about the *Data* class yet? Oh, forgive me. The *Data* class has two attributes, the text data and its label, and represents a single unity of data. See the following example.
 
 ```
@@ -37,6 +38,7 @@ dataset.add(data)
 ```
 Do not forget that the label is always binary, 0 for negatives and 1 for positives.
 
+#### Getting our training and testing data
 We have also a second method called *get_train_test()* and guess it... You're right! It divide our dataset in train and test. So you can ask me if you can get just a part of the entire dataset, yes, you can! This method receive as parameters the number of docs you want to get and the percentage of the division. Let's see an example:
 
 ```
@@ -44,6 +46,22 @@ x_train, y_train, x_test, y_test = dataset.get_train_test(0.2, 1000)
 ```
 
 Here we are asking for a data sample of 1000 documents and 20% of it is for training and the rest is for test. Oh, so simple, I know you have already got it.
+
+#### Saving into a CSV file
+"Oh, Turorial, and if I would like to save in a CSV file?" There's no problem. The class method *save_to_csv()* generates a CSV file with all your dataset. See the example below.
+
+```
+dataset = getData()
+dataset.save_to_csv()
+```
+This method will create a CSV file with two columns: data and label. The first one contain the tokenized texts and the second, its correspondent label. Each row contains a different data text.
+
+```
+data                                     label
+
+this tutorial is awesome                 1
+this tutorial does not explain anything  0
+```
 
 ### Amazon and Movie Review preprocessing
 
