@@ -17,7 +17,7 @@ def text_to_binary(data, dictionary):
     return sequences
 
 
-def text_to_tdidf(data, dictionary):
+def text_to_tfidf(data, dictionary):
     sequences = []
     for doc in data:
         doc_sequence = []

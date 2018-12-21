@@ -25,7 +25,6 @@ def genRottenData():
                 if text == "":
                     break
 
-                print(text)
                 # Tokenizing and lemmatizing
                 text = to_process(text)
 

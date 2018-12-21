@@ -22,12 +22,12 @@ class Dataset:
         index_test = []
 
         while len(index_train) != num_train:
-            value = randint(0, num)
+            value = randint(0, num-1)
             if value not in index_train:
                 index_train.append(value)
 
         while len(index_test) != num_test:
-            value = randint(0, num)
+            value = randint(0, num-1)
             if value not in index_train and value not in index_test:
                 index_test.append(value)
 

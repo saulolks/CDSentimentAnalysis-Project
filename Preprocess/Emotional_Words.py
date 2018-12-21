@@ -14,7 +14,14 @@ def getDictionary(data, dict_size):
         dictionary.append([word, vocabulary[word]])
 
     dictionary.sort(key=lambda x: x[1], reverse=True)
-    return dictionary[:dict_size]
+
+    if dict_size > 0:
+        dictionary = dictionary[:dict_size]
+    else:
+        dict_size = int(len(dictionary)/7)
+        dictionary = dictionary[:dict_size]
+
+    return dictionary
 
 
 # verify if a word has a tendency to appear in a kind of label
@@ -42,7 +49,6 @@ def identifyEmotional(word_occurence, percentage):
 
     return emotional_words
 
-
 # this function produces a list of lists containing a 2-dimensional vector
 # for each word in dictionary. the vector V represents V[0] the percentile
 # of appearance of that word in negative documents, and V[1], in positive.
@@ -50,24 +56,27 @@ def identifyEmotional(word_occurence, percentage):
 def getEmotionalWords(data, label, dict_size=-1, word_precision=0.7):
     size = len(data)
 
-    if dict_size < 0:
-        dict_size = int(len(data) / 4)
-
     dictionary = getDictionary(data, dict_size)
 
     word_occurence = []
-
+    print(1)
+    print(dictionary.__len__())
+    j = 1
     for word in dictionary:
         wordVec = [0, 0]
+        print(j)
         for i in range(size):
             if word[0] in data[i]:
                 wordVec[label[i]] = wordVec[label[i]] + 1
         word_occurence.append(wordVec)
+        j = j+1
+    print(2)
     emotional_words = identifyEmotional(word_occurence, word_precision)
-
+    print(3)
+    result = []
 
     for i in range(len(emotional_words)):
-        if emotional_words[i][0] == -1:
-            del emotional_words[i]
+        if emotional_words[i][0] != -1:
+            result.append(dictionary[i][0])
 
-    return emotional_words
+    return result

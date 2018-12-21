@@ -7,7 +7,7 @@ from Preprocess.preProcessing import to_process
 
 def genAmazonData():
     dataset = Dataset()
-    arq = open('AmazonDatasetTest.txt', 'r', encoding='utf-8')
+    arq = open('Datasets/AmazonDatasetTest.txt', 'r', encoding='utf-8')
     i = 0
     while True:
         try:
