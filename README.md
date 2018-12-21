@@ -7,12 +7,16 @@ This repository contains a structure to apply the idea of sentiment analysis for
  * Scikit-Learn
  * GloVe
  
- The dataset we use was the following:
+The dataset we use was the following:
  
  * Amazon Reviews for Sentiment Analysis (https://www.kaggle.com/bittlingmayer/amazonreviews)
  * Movie Review Data (http://www.cs.cornell.edu/people/pabo/movie-review-data/)
  
- So we are going to explain how to use it and the first step is to get the data and process it.
+So we are going to explain how to use it and the first step is to get the data and process it.
+ 
+The project process is simplified in the following figure. While the feature extraction definitions are in progress, most have already been defined. 
+ 
+ ![Pipeline](Classes/pipeline.PNG)
  
  ## Preprocessing
  
@@ -74,6 +78,27 @@ But you just must have the *AmazonDatasetTest.txt* and calls the function. See a
 ```
 dataset = AmazonDatasetProcessing.getData()
 ```
-
 It will return to you the entire Amazon dataset as a *Dataset* class. So, you will have a dataset with 400k texts and its labels. Is it too much for you? Don't worry. Use the *Dataset* class method, *get_train_test()*, and put the percentage of test and train and how much data you want, as I've already showed you. The same thing you can do with Movie Review dataset.
+
+### Emotional words
+
+Getting the emotional words is the first of our feature extraction. Basically, the emotional words of a corpus are the word which appear most frequently in one kind of label. The function who test if a term is a emotional word is the following.
+
+*F(w) = (L1, l2)*
+
+**F** represents a tuple of values and **w** a word. The tuple ***(L1, L2)*** is formed by ***L1***, the frequence of the word ***w*** appears in label negative, and ***L2***, the frequence of the word ***w*** appears in label positive. Having the tuple of the entire dataset, we test it.
+
+*p(w) = L1/(L1+L2)
+n(w) = L2/(L1+L2)*
+
+Here we have the frequence of the word ***w*** appears in each label (p to positives and n to negatives) in percentage. Ok, we just jave to check if *difference = p(w)-n(w)* is bigger than 0.4 (this threshold can vary according to the preferences).
+
+To use that function in our code, we just call the function passing the data, its labels and the threshold.
+
+```
+dictionary = getEmotionalWords(x_train, y_train, word_precision=0.7)
+```
+
+## Building a RNN
+
  
