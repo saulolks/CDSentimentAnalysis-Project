@@ -101,4 +101,45 @@ dictionary = getEmotionalWords(x_train, y_train, word_precision=0.7)
 
 ## Building a RNN
 
- 
+### Getting the data
+Now we are explain how we wrote the code in *recurrent_classifier.py* that implements a Recurrent Neural Network to classify our datasets. So, step by step, we will use our before-explained class and methods to favor us. Let's do this.
+
+First of all let's get our Amazon Dataset with the function *getData()* from *AmazonDatasetPreprocessing.py* and it will return to us a vector of documents where each element is a text. After that, let's get a sample of this dataset, with 50k documents, divided as 30% for tests and the rest for train.
+```
+dataset = getData()
+x_train, y_train, x_test, y_test = dataset.get_train_test(0.3, 50000)
+```
+### Extracting the features
+Then, we will extract the emotional words to build our own dictionary, with the important words for our work. 
+```
+dictionary = getEmotionalWords(x_train, y_train, word_precision=0.7)
+```
+After that, let's convert our vectors to a Numpy array to put in the Keras neural networks, and save some important informations from our data in variables.
+```
+y_train = np.array(y_train)
+y_train = keras.utils.to_categorical(y_train, 2)
+data_size = len(x_train)
+num_of_words = len(dictionary
+```
+
+### Getting the binary vector
+We could use the Keras function *sequences_to_matrix()* to convert each text of our dataset to a vector of 0s and 1s. However, this function does not accept a customized dictionary, as the one obtained from our *getEmotionalWords()* function. So, we have developed our own *sequences_to_matrix()* function.
+```
+x_train = text_to_binary(x_train, dictionary)
+x_train = np.array(x_train)
+```
+
+### Building the network
+In this step we build our neural network with embeddings, dropout, LSTM and dense layers. We used the *sigmoid* and *softmax* for activation functions.
+```
+model_conv = Sequential()
+
+model_conv.add(Embedding(num_of_words, 100, input_length=num_of_words))
+model_conv.add(Dropout(0.2))
+model_conv.add(LSTM(100))
+model_conv.add(Dropout(0.2))
+model_conv.add(Dense(2, activation='sigmoid', input_shape=(num_of_words, )))
+
+model_conv.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+model_conv.fit(x_train, y_train, verbose=1, epochs=3)
+```
