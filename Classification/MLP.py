@@ -1,5 +1,7 @@
 #----------------MLP Classifier-------
 import keras
+from keras.models import Sequential
+from keras.layers.core import Dense, Activation, Dropout
 
 def mlp(x_train, x_test,y_train, y_test):
     neuralNetwork(x_train, x_test,y_train, y_test)
