@@ -93,11 +93,15 @@ n(w) = L2/(L1+L2)*
 
 Here we have the frequence of the word ***w*** appears in each label (p to positives and n to negatives) in percentage. Ok, we just jave to check if *difference = p(w)-n(w)* is bigger than 0.4 (this threshold can vary according to the preferences).
 
-To use that function in our code, we just call the function passing the data, its labels and the threshold.
+To use that function in our code, we just call the function passing the data, its labels and the threshold (the word precision is the frequence percentage of the term should have in a kind of label).
 
 ```
-dictionary = getEmotionalWords(x_train, y_train, word_precision=0.7)
+dictionary = getEmotionalWords(x_train, y_train, word_precision=0.7, pos_filter='partial')
 ```
+
+#### POS Filter
+
+Our POS Filter works as a complement of our *Emotional Words* function. It can be ignored or can be setted as 'partial' (will select only nouns, adverbs and adjectives) or 'total' (only adjectives).
 
 ## Building a RNN
 
