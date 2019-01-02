@@ -4,7 +4,6 @@ from Classes.Data import Data
 from Classes.Dataset import Dataset
 from Preprocess.preProcessing import to_process
 
-
 def genAmazonData():
     dataset = Dataset()
     arq = open('Datasets/AmazonDatasetTest.txt', 'r', encoding='utf-8')
@@ -38,7 +37,7 @@ def genAmazonData():
 def getData():
     amazondataset = Dataset()
     try:
-        with open('amazon_dataset', 'rb') as fp:
+        with open('Datasets/amazon_dataset', 'rb') as fp:
             amazondataset = pickle.load(fp)
     except:
         amazondataset = genAmazonData()

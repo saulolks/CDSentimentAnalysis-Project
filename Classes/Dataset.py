@@ -36,6 +36,18 @@ class Dataset:
         docs_test = []
         labels_test = []
 
+        '''
+        arq = open('Files/datasets/amazontrain.txt', 'w')
+        for i in index_train:
+            arq.write("%d " %i)
+        arq.close()
+
+        arq = open('Files/datasets/amazontest.txt', 'w')
+        for i in index_test:
+            arq.write("%d " %i)
+        arq.close()
+        '''
+
         for i in index_train:
             docs_train.append(self.docs[i])
             labels_train.append(self.labels[i])

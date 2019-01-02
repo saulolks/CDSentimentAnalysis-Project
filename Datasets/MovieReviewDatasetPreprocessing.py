@@ -34,7 +34,7 @@ def genRottenData():
                 break
         i = i + 1
 
-    with open('rotten_dataset', 'wb') as fp:
+    with open('Datasets/rotten_dataset', 'wb') as fp:
         pickle.dump(dataset, fp)
     return dataset
 
@@ -42,7 +42,7 @@ def genRottenData():
 def getData():
     rottendataset = Dataset()
     try:
-        with open('rotten_dataset', 'rb') as fp:
+        with open('Datasets/rotten_dataset', 'rb') as fp:
             rottendataset = pickle.load(fp)
     except:
         rottendataset = genRottenData()

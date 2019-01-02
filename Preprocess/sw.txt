@@ -114,6 +114,7 @@ did
 didn't
 different
 do
+doe
 does
 doesn't
 doing
@@ -177,6 +178,7 @@ got
 gotten
 greetings
 h
+ha
 had
 hadn't
 happens
@@ -503,6 +505,7 @@ via
 viz
 vs
 w
+wa
 want
 wants
 was

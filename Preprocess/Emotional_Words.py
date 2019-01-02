@@ -1,4 +1,6 @@
-def getDictionary(data, dict_size):
+import nltk
+
+def getDictionary(data, dict_size, pos_filter):
     vocabulary = {}
     for document in data:
         for word in document:
@@ -21,7 +23,24 @@ def getDictionary(data, dict_size):
         dict_size = int(len(dictionary)/7)
         dictionary = dictionary[:dict_size]
 
-    return dictionary
+    result = [word[0] for word in dictionary]
+
+    if pos_filter == 'all':
+        return result
+    elif pos_filter == 'parcial':
+        pos_tags = nltk.pos_tag(result)
+        result = []
+        for word in pos_tags:
+            if word[1] == 'JJ' or word[1] == 'JJR' or word[1] == 'JJS' or word[1] == 'RB' or word[1] == 'RBR' or word[1] == 'RBS' or word[1] == 'NN' or word[1] == 'NNS' or word[1] == 'NNP' or word[1] == 'NNPS':
+                result.append(word[0])
+    else:
+        pos_tags = nltk.pos_tag(result)
+        result = []
+        for word in pos_tags:
+            if word[1] == 'JJ' or word[1] == 'JJR' or word[1] == 'JJS':
+                result.append(word[0])
+
+    return result
 
 
 # verify if a word has a tendency to appear in a kind of label
@@ -53,10 +72,10 @@ def identifyEmotional(word_occurence, percentage):
 # for each word in dictionary. the vector V represents V[0] the percentile
 # of appearance of that word in negative documents, and V[1], in positive.
 
-def getEmotionalWords(data, label, dict_size=-1, word_precision=0.7):
+def getEmotionalWords(data, label, dict_size=-1, word_precision=0.6, pos_filter='all'):
     size = len(data)
 
-    dictionary = getDictionary(data, dict_size)
+    dictionary = getDictionary(data, dict_size, pos_filter)
 
     word_occurence = []
     print(1)
@@ -64,19 +83,16 @@ def getEmotionalWords(data, label, dict_size=-1, word_precision=0.7):
     j = 1
     for word in dictionary:
         wordVec = [0, 0]
-        print(j)
         for i in range(size):
-            if word[0] in data[i]:
+            if word in data[i]:
                 wordVec[label[i]] = wordVec[label[i]] + 1
         word_occurence.append(wordVec)
         j = j+1
-    print(2)
     emotional_words = identifyEmotional(word_occurence, word_precision)
-    print(3)
     result = []
 
     for i in range(len(emotional_words)):
         if emotional_words[i][0] != -1:
-            result.append(dictionary[i][0])
-
+            result.append(dictionary[i])
+    print(result.__len__())
     return result

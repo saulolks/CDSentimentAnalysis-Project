@@ -3,7 +3,10 @@ import math
 
 def text_to_binary(data, dictionary):
     sequences = []
+    i = 0
     for doc in data:
+        print(i)
+        i = i+1
         doc_sequence = []
 
         for word in dictionary:
